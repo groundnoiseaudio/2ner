@@ -3,37 +3,37 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>2ner</title>
+    <title>2NER Plugin</title>
     <meta
       name="description"
-      content="2ner is a simple tuner plugin that stays out of the way."
+      content="2NER is a simple, complete tuner plugin for guitar and bass."
     />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="unit" aria-label="2ner landing page">
-      <div class="brand">Ground Noise</div>
+    <main class="unit" aria-label="2NER Plugin">
+      <div class="brand">Ground Noise Audio</div>
       <div class="topline">
         <nav aria-label="Downloads">
           <a href="https://github.com/groundnoiseaudio/2ner/releases/latest/download/2ner-macOS-installer.pkg">Mac</a>
           <a href="https://github.com/groundnoiseaudio/2ner/releases/latest/download/2ner-Windows-installer.exe">Windows</a>
+          <span id="release-version" aria-label="Latest release version">Loading version...</span>
         </nav>
       </div>
 
       <section class="faceplate" aria-labelledby="title">
-        <p class="serial">TUNER PLUGIN / QUICK CHECK</p>
-        <h1 id="title">Simple tuner.</h1>
+        <p class="serial">TUNER PLUGIN / MULTIPLE TUNINGS</p>
+        <h1 id="title">Simple tuning.</h1>
         <p class="copy">
-          2ner gives you a clear pitch readout without taking over the session.
-          Open it, tune, and move on.
+          2NER gives you a clear pitch readout with support for multiple tunings.
         </p>
       </section>
 
       <section class="shots" aria-label="Plugin screenshot">
         <figure>
-          <img src="assets/screenshot-2ner.png" alt="2ner plugin tuner interface" />
-          <figcaption>Plugin tuner</figcaption>
+          <img src="assets/screenshot.png" alt="2NER tuner plugin interface" />
+          <figcaption>2NER</figcaption>
         </figure>
       </section>
 
@@ -42,15 +42,22 @@
         <ul>
           <li>Tune in real time</li>
           <li>Choose from multiple tunings</li>
-          <li>See the note and cents clearly</li>
-          <li>Track pitch without a jumpy display</li>
-          <li>See sharp and flat indication at a glance</li>
-          <li>Adjust the reference pitch</li>
-          <li>Mute the signal while tuning</li>
-          <li>Use it with guitar or bass</li>
-          <li>Keep CPU use low</li>
+          <li>See note and cents clearly</li>
+          <li>Double-click any note to hear it</li>
+          <li>Mute the input while tuning</li>
+          <li>Built for guitar and bass</li>
+          <li>Uses minimal CPU</li>
         </ul>
       </section>
     </main>
+    <script>
+      fetch("https://api.github.com/repos/groundnoiseaudio/2ner/releases/latest")
+        .then((response) => response.ok ? response.json() : Promise.reject())
+        .then((release) => {
+          const version = document.querySelector("#release-version");
+          version.textContent = release.tag_name;
+        })
+        .catch(() => {});
+    </script>
   </body>
 </html>
